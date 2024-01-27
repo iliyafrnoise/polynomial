@@ -147,6 +147,24 @@ while i <= max(number_of_power , number_of_power2) :
 print("subtraction of the resulting polynomial with numpy")
 print(eq)
 
+#numpy ضرب با  
+import numpy as np
+coefficients.reverse()
+coefficients2.reverse()
+Multiplication_coefficients = np.polymul(coefficients, coefficients2)
+Multiplication_string = np.poly1d(Multiplication_coefficients)
+print("Multiplication of the resulting polynomial with numpy")
+print(Multiplication_string)
+
+
+
+
+
+
+
+
+
+
 # numpyمشتق با  
 
 import numpy as np
