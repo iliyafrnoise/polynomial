@@ -160,6 +160,7 @@ print(Multiplication_string)
 # numpyمشتق با  
 
 import numpy as np
+coefficients.reverse()
 derivative_coefficients = np.polyder(coefficients)
 derivative_string = np.poly1d(derivative_coefficients)
 print("Derivative of the resulting polynomial with numpy:")
@@ -175,6 +176,25 @@ print(integral_string)
 
 
 
+
+#برازش منحنی 
+
+import numpy as np
+import matplotlib.pyplot as plt
+number_of_power = int(input("Enter the number of power: "))
+coefficients = []
+for i in range(number_of_power + 1):
+    coefficient = float(input(f"Enter coefficient of x^{number_of_power - i}: "))
+    coefficients.append(coefficient)
+x_data = np.linspace(-10, 10, 100)  
+y_data = np.polyval(coefficients, x_data)  
+plt.plot(x_data, y_data, label='Fitted Curve', color='green')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Curve Fitting')
+plt.legend()
+plt.grid(True)
+plt.show()
 
 
 
