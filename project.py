@@ -113,33 +113,7 @@ to_be_printed += "0"
 print(to_be_printed)
 
 
-import numpy as np
-import matplotlib.pyplot as plt
 
-# ورودی‌ها
-x = np.arange(number_of_power + 1)  # 0 تا number_of_power
-y = np.array(coefficients)
-
-# برازش یک چندجمله‌ای
-degree = number_of_power
-coefficients = np.polyfit(x, y, degree)
-
-# ساختن یک تابع چندجمله‌ای با استفاده از ضرایب برازش شده
-poly_function = np.poly1d(coefficients)
-
-# تولید نقاط برای رسم خط برازش
-x_fit = np.linspace(0, number_of_power, 100)
-y_fit = poly_function(x_fit)
-
-# نمایش داده‌ها و خط برازش شده
-plt.plot(x_fit, y_fit, color='red', label='خط برازش شده')
-plt.scatter(x, y, label='نقاط داده‌ها')
-plt.xlabel('متغیر مستقل')
-plt.ylabel('متغیر وابسته')
-plt.title('برازش چندجمله‌ای به داده‌ها')
-plt.legend()
-plt.grid(True)
-plt.show()
 
 
 
