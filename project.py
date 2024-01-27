@@ -21,7 +21,7 @@ while i <= number_of_power2 :
     coefficient2 = int(input(f"enter coefficient of x^^{i} : "))
     coefficients2.append(coefficient2)
     i += 1
-equation_str2 = "" 
+equation_str2 = ""
 i = 0 
 while i <= number_of_power2 :
     if i != number_of_power2:
@@ -113,10 +113,37 @@ to_be_printed += "0"
 print(to_be_printed)
 
 
+import numpy as np
 
+MatrixCoef1 = np.array(coefficients)
+MatrixCoef2 = np.array(coefficients2)
 
+MatrixCoefResult = MatrixCoef2 + MatrixCoef1
+eq = ""
+i = 0
+while i <= max(number_of_power , number_of_power2) :
+    if i != max(number_of_power2 , number_of_power):
+        eq += f"{MatrixCoefResult[i]}x^{i} + "
+    else :
+        eq += f"{MatrixCoefResult[i]}x^{i}"
+    i += 1
+print(eq)
 
+import numpy as np
 
+MatrixCoef1 = np.array(coefficients)
+MatrixCoef2 = np.array(coefficients2)
+
+MatrixCoefResult = MatrixCoef1 - MatrixCoef2
+eq = ""
+i = 0
+while i <= max(number_of_power , number_of_power2) :
+    if i != max(number_of_power2 , number_of_power):
+        eq += f"{MatrixCoefResult[i]}x^{i} + "
+    else :
+        eq += f"{MatrixCoefResult[i]}x^{i}"
+    i += 1
+print(eq)
 
 
 
