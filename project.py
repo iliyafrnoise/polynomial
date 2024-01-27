@@ -155,20 +155,11 @@ Multiplication_coefficients = np.polymul(coefficients, coefficients2)
 Multiplication_string = np.poly1d(Multiplication_coefficients)
 print("Multiplication of the resulting polynomial with numpy")
 print(Multiplication_string)
-
-
-
-
-
-
-
-
-
+#numpy تقسیم با 
 
 # numpyمشتق با  
 
 import numpy as np
-coefficients.reverse()
 derivative_coefficients = np.polyder(coefficients)
 derivative_string = np.poly1d(derivative_coefficients)
 print("Derivative of the resulting polynomial with numpy:")
