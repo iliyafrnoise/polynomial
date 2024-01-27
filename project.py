@@ -113,8 +113,8 @@ to_be_printed += "0"
 print(to_be_printed)
 
 
-import numpy as np
-
+#numpyجمع با 
+import numpy as np 
 MatrixCoef1 = np.array(coefficients)
 MatrixCoef2 = np.array(coefficients2)
 
@@ -127,8 +127,9 @@ while i <= max(number_of_power , number_of_power2) :
     else :
         eq += f"{MatrixCoefResult[i]}x^{i}"
     i += 1
+print("sum of the resulting polynomial with numpy")
 print(eq)
-
+#numpy تفریق با
 import numpy as np
 
 MatrixCoef1 = np.array(coefficients)
@@ -143,7 +144,26 @@ while i <= max(number_of_power , number_of_power2) :
     else :
         eq += f"{MatrixCoefResult[i]}x^{i}"
     i += 1
+print("subtraction of the resulting polynomial with numpy")
 print(eq)
+
+# numpyمشتق با  
+
+import numpy as np
+coefficients.reverse()
+derivative_coefficients = np.polyder(coefficients)
+derivative_string = np.poly1d(derivative_coefficients)
+print("Derivative of the resulting polynomial with numpy:")
+print(derivative_string)
+
+#numpy انتگرال با 
+import numpy as np
+integral_coefficients = np.polyint(coefficients)
+integral_string = np.poly1d(integral_coefficients)
+print("integral of the resulting polynomial with numpy")
+print(integral_string)
+
+
 
 
 
