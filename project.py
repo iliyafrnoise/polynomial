@@ -168,6 +168,50 @@ while i < len(multi_poly):
 print("the multiplication is :    ")
 print(to_be_printed)   
 
+#تقسیم دو چند جمله ای 
+
+
+
+
+
+
+
+
+
+
+
+# ام یک چند جمله ای  n  مشتق 
+def Derivative(coefficients , number_of_power):
+    derivative=[]
+    i = 1
+    while i<= number_of_power :
+        derivative.append(0)
+        derivative[i-1] = coefficients[i]*i
+        i += 1
+    return derivative
+number_of_derivative = int(input("enter a number of derivative :   "))
+derivative_result = coefficients
+for i in range(0, number_of_derivative):
+    derivative_result = Derivative(derivative_result, len(derivative_result)-1)
+to_be_printed = ""
+i = 0
+while i < len(derivative_result):
+    if i != len(derivative_result):
+         to_be_printed += f"{derivative_result[i]}x{i} + "
+    else :
+        to_be_printed += f"{derivative_result[i]}x{i}  "
+    i += 1
+print("the derivative result is :    ")
+print(to_be_printed)   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -248,7 +292,9 @@ print(Multiplication_string)
 # numpyمشتق با  
 
 import numpy as np
-derivative_coefficients = np.polyder(coefficients)
+derivative_coefficients = coefficients
+for i in range(0 , number_of_derivative):
+    derivative_coefficients = np.polyder(derivative_coefficients)
 derivative_string = np.poly1d(derivative_coefficients)
 print("Derivative of the resulting polynomial with numpy:")
 print(derivative_string)
