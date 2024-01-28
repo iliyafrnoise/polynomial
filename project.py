@@ -184,15 +184,17 @@ print(to_be_printed)
 def Derivative(coefficients , number_of_power):
     derivative=[]
     i = 1
-    while i<= number_of_power :
+    while i <= number_of_power :
         derivative.append(0)
         derivative[i-1] = coefficients[i]*i
         i += 1
     return derivative
 number_of_derivative = int(input("enter a number of derivative :   "))
 derivative_result = coefficients
-for i in range(0, number_of_derivative):
+i = 0
+while  i < number_of_derivative :    
     derivative_result = Derivative(derivative_result, len(derivative_result)-1)
+    i += 1
 to_be_printed = ""
 i = 0
 while i < len(derivative_result):
@@ -203,6 +205,35 @@ while i < len(derivative_result):
     i += 1
 print("the derivative result is :    ")
 print(to_be_printed)   
+
+#ام چند جمله ای  n انتگرال 
+def Integral(coefficients,number_of_power):
+    integral=[]
+    integral.append(0)
+    i = 0
+    while i <= number_of_power :
+        integral.append(0)
+        integral[i+1] = coefficients[i]/(i+1)
+        i += 1
+    return integral
+number_of_integral = int(input("enter a number of integral :   "))
+integral_result = coefficients
+i = 0
+while i < number_of_integral:
+    integral_result = Integral(integral_result, len(integral_result)-1)
+    i += 1
+to_be_printed = ""
+i = 0
+while i < len(integral_result):
+    if i != len(integral_result):
+         to_be_printed += f"{integral_result[i]}x{i} + "
+    else :
+        to_be_printed += f"{integral_result[i]}x{i}  "
+    i += 1
+print("the integral result is :    ")
+print(to_be_printed)   
+
+
 
 
 
@@ -293,18 +324,26 @@ print(Multiplication_string)
 
 import numpy as np
 derivative_coefficients = coefficients
-for i in range(0 , number_of_derivative):
+i = 0
+while i < number_of_derivative :
     derivative_coefficients = np.polyder(derivative_coefficients)
+    i += 1
 derivative_string = np.poly1d(derivative_coefficients)
 print("Derivative of the resulting polynomial with numpy:")
 print(derivative_string)
 
 #numpy انتگرال با 
 import numpy as np
-integral_coefficients = np.polyint(coefficients)
+integral_coefficients = coefficients
+i = 0
+while i < number_of_integral:
+    integral_coefficients = np.polyint(integral_coefficients)
+    i += 1
 integral_string = np.poly1d(integral_coefficients)
-print("integral of the resulting polynomial with numpy")
+
+print(f"The {number_of_integral}-th integral of the polynomial:")
 print(integral_string)
+
 #numpy ریشه با 
 
 
@@ -314,25 +353,29 @@ print(integral_string)
 
 
 #برازش منحنی 
-
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+def model_function(x, *coefficients):
+    powers_of_x = np.vstack([x**i for i in range(len(coefficients))]).T
+    y = np.dot(powers_of_x, coefficients)
+    return y
 number_of_power = int(input("Enter the number of power: "))
 coefficients = []
-for i in range(number_of_power + 1):
-    coefficient = float(input(f"Enter coefficient of x^{number_of_power - i}: "))
+i = 0
+while i <= number_of_power:
+    coefficient = float(input(f"Enter the coefficient of x^{i}: "))
     coefficients.append(coefficient)
-x_data = np.linspace(-10, 10, 100)  
-y_data = np.polyval(coefficients, x_data)  
-plt.plot(x_data, y_data, label='Fitted Curve', color='green')
+    i += 1
+x_data = np.linspace(-10, 10, 100)
+y_data = model_function(x_data, *coefficients) + np.random.normal(0, 5, len(x_data)) 
+popt, pcov = curve_fit(model_function, x_data, y_data, p0=coefficients)
+y_fit = model_function(x_data, *popt)
+plt.scatter(x_data, y_data, label='Data')
+plt.plot(x_data, y_fit, color='red', label='Fitted curve')
 plt.xlabel('X')
 plt.ylabel('Y')
-plt.title('Curve Fitting')
+plt.title('Curve Fitting for the Polynomial')
 plt.legend()
 plt.grid(True)
 plt.show()
-
-
-
-
-
