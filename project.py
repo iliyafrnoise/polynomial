@@ -1,7 +1,8 @@
 #  1 دریافت چند جمله ای
-#در ابتدا ما به عنوان ورودی تعداد توان رو از کاربر دریافت میکنیم
-#و بعد با استفاده از حلقه ها تا زمانی که متعیر کمکی ما کوچکتر و مساوی تعداد توان هاست 
-#ضریب هارو دریافت میکنیم و در مجموعه ضرایب ان را اضافه میکنیم
+#در شروع ابتدا درجه اخرین جمله دریافت میشه 
+#با استفاده از حلقه هر مرحله تا زمانی که حلقه برقراره :
+#ضریب دریافت میشه 
+# و در لیست اضافه میشه 
 number_of_power = int(input("enter a number of power : "))
 i = 0
 coefficients = []
@@ -26,9 +27,10 @@ while i <= number_of_power :
     i += 1
 print(equation_str)
 #دریافت چند جمله ای 2
-#در ابتدا ما به عنوان ورودی تعداد توان رو از کاربر دریافت میکنیم
-#و بعد با استفاده از حلقه ها تا زمانی که متعیر کمکی ما کوچکتر و مساوی تعداد توان هاست 
-#ضریب هارو دریافت میکنیم و در مجموعه ضرایب ان را اضافه میکنیم
+#در شروع ابتدا درجه اخرین جمله دریافت میشه 
+#با استفاده از حلقه هر مرحله تا زمانی که حلقه برقراره :
+#ضریب دریافت میشه 
+# و در لیست اضافه میشه 
 number_of_power2 = int(input("enter a number of power : "))
 i = 0
 coefficients2 = []
@@ -72,12 +74,16 @@ def calculate(coefficients , number_of_power ):
 print(calculate(coefficients,number_of_power))
 
 #تابع جمع دو  چند جمله ای
-def sum(coefficients, coefficients2):
+#این تابع در ابتدا دو لیست ضرایب رو هم اندازه میکنه
+#بعد عناصر موجود در این دو لیست رو باهم جمع میکنه 
+#و در یک لیست جدا میریزه 
+#مربوط به خودش در یک استرینگ خالی که تعریف شده میریزه#ه  x{i}سپس این ضرایب رو در کنار 
+#در اخر اون استرینگ رو چاپ میکنیم که همون حاصل جمع دو چندجمله ای هست     
+def Sum(coefficients, coefficients2):
     minimum = min(len(coefficients), len(coefficients2))
     maximum = max(len(coefficients), len(coefficients2))
-    result = []
+    sum_result = []
     i = 0
-
     if minimum == len(coefficients):
         minimum_func = coefficients
         maximum_func = coefficients2
@@ -89,30 +95,31 @@ def sum(coefficients, coefficients2):
         minimum_func.append(0)
 
     while i < len(minimum_func):
-        result.append(maximum_func[i] + minimum_func[i])
+        sum_result.append(maximum_func[i] + minimum_func[i])
         i += 1
+    return sum_result
 
-    return result
-
-sum_result = sum(coefficients, coefficients2)
+sum_result = Sum(coefficients, coefficients2)
 to_be_printed = ""
 i = 0
 while i < len(sum_result):
     if i != len(sum_result):
-         to_be_printed += f"{sum_result[i]}x{i} + "
+         to_be_printed += f"{sum_result[i]}x^^{i} + "
     else :
-        to_be_printed += f"{sum_result[i]}x{i}  "
+        to_be_printed += f"{sum_result[i]}x^^{i}  "
     i += 1
 print("the sum is :    ")
 print(to_be_printed)
 
 #محاسبه تفریق دو چند جمله ای
-def subtraction(coefficients, coefficients2):
-    maximum_func = []
-    minimum_func = []
-    result = []
+#این تابع در ابتدا دو لیست ضرایب رو هم اندازه میکنه
+#بعد عناصر موجود در این دو لیست رو باهم تفریق میکنه 
+#و در یک لیست جدا میریزه 
+#مربوط به خودش در یک استرینگ خالی که تعریف شده میریزه  x{i}سپس این ضرایب رو در کنار 
+# در اخر اون استرینگ رو چاپ میکنیم که همون حاصل تفریق دو چندجمله ای هست     
+def Subtraction(coefficients, coefficients2):
+    subtraction_result = []
     i = 0
-
     minimum = min(len(coefficients), len(coefficients2))
     maximum = max(len(coefficients), len(coefficients2))
 
@@ -126,13 +133,13 @@ def subtraction(coefficients, coefficients2):
     while len(minimum_func) < len(maximum_func):
         minimum_func.append(0)
 
-    while i < minimum:
-        result.append(maximum_func[i] - minimum_func[i])
+    while i < len(minimum_func):
+        subtraction_result.append(maximum_func[i] - minimum_func[i])
         i += 1
 
-    return result
+    return subtraction_result
 
-subtraction_result = subtraction(coefficients, coefficients2)
+subtraction_result = Subtraction(coefficients, coefficients2)
 to_be_printed = ""
 i = 0
 while i < len(subtraction_result):
@@ -145,6 +152,12 @@ print("the subtraction is :    ")
 print(to_be_printed)
 
 #ضرب دو چند جمله ای
+#این تابع ضرب دو چند جمله ای رو حساب میکنه 
+#ابتدا به اندازه جمع درجات مجموعه اولی و مجموعه دومی به علاوه یک در مجموعه ضرایب ضرب 0 اضافه می کنیم
+#  بعد با استفاده از وایل تو در تو عنصر ضرب مجموعه ضرایب اولی رو در  عنصر ضرایب دومی در عنصر مجموعه ضرایب میریزیم
+# تابع رو فرا میخونیم که ضرب دو مجموعه رو حساب کنه 
+#   و  x^^{i}+ یک استرینگ خالی تعریف میکنیم کهضرایب رو درکنار
+#چاپ میکنه 
 def Multiplication(coefficients,coefficients2 , number_of_power , number_of_power2):
     multiplication= []
     max_degree = number_of_power+number_of_power2 + 1
@@ -152,20 +165,25 @@ def Multiplication(coefficients,coefficients2 , number_of_power , number_of_powe
     while i <= max_degree :
         multiplication.append(0)
         i += 1
-    for i in range(0,number_of_power+1) :
-        for j in range(0,number_of_power2+1):
-            multiplication[i+j] += coefficients[i]*coefficients2[j]
+    i = 0
+    while i <= number_of_power:
+        j = 0
+        while j <= number_of_power2 :
+              multiplication[i+j]  +=  coefficients[i] * coefficients2[j]
+              j += 1
+        i += 1
+
     return multiplication
 multi_poly = Multiplication(coefficients,coefficients2 , number_of_power , number_of_power2)
 to_be_printed = ""
 i = 0
-while i < len(multi_poly):
+while i < len(multi_poly) :
     if i != len(multi_poly):
          to_be_printed += f"{multi_poly[i]}x{i} + "
     else :
         to_be_printed += f"{multi_poly[i]}x{i}  "
     i += 1
-print("the multiplication is :    ")
+print("the multiplication is :  ")
 print(to_be_printed)   
 
 #تقسیم دو چند جمله ای 
@@ -233,7 +251,7 @@ while i < len(integral_result):
 print("the integral result is :    ")
 print(to_be_printed)   
 
-
+#
 
 
 
@@ -277,80 +295,94 @@ print(to_be_printed)
 
 
 #numpyجمع با 
+# با استفاده از کتابخانه نامپای دو لیست به دو ارایه تبدیل میشن که جمع دو ارایه , ارایه مجموع ضرایب رو تشکیل میده
+#که یک کلاس از کتابخانه نامپای است   استفاده میکنیم  np.poly1d برای نوشتن به فرم چند جمله ای از 
+# در اخر حاصل را چاپ می کنیم
 import numpy as np 
-MatrixCoef1 = np.array(coefficients)
-MatrixCoef2 = np.array(coefficients2)
-
-MatrixCoefResult = MatrixCoef2 + MatrixCoef1
-eq = ""
-i = 0
-while i <= max(number_of_power , number_of_power2) :
-    if i != max(number_of_power2 , number_of_power):
-        eq += f"{MatrixCoefResult[i]}x^{i} + "
-    else :
-        eq += f"{MatrixCoefResult[i]}x^{i}"
-    i += 1
-print("sum of the resulting polynomial with numpy")
-print(eq)
-#numpy تفریق با
-import numpy as np
-
-MatrixCoef1 = np.array(coefficients)
-MatrixCoef2 = np.array(coefficients2)
-
-MatrixCoefResult = MatrixCoef1 - MatrixCoef2
-eq = ""
-i = 0
-while i <= max(number_of_power , number_of_power2) :
-    if i != max(number_of_power2 , number_of_power):
-        eq += f"{MatrixCoefResult[i]}x^{i} + "
-    else :
-        eq += f"{MatrixCoefResult[i]}x^{i}"
-    i += 1
-print("subtraction of the resulting polynomial with numpy")
-print(eq)
-
-#numpy ضرب با  
-import numpy as np
 coefficients.reverse()
 coefficients2.reverse()
+sum_Coef1 = np.array(coefficients)
+sum_Coef2 = np.array(coefficients2)
+sum_MatrixCoefResult =sum_Coef1  + sum_Coef2
+sum_matrix_result=np.poly1d(sum_MatrixCoefResult)
+print("sum of the resulting polynomial with numpy")
+print(sum_matrix_result)
+#numpy تفریق با
+# با استفاده از کتابخانه نامپای دو لیست به دو ارایه تبدیل میشن که تفریق دو ارایه, تفریق ارایه  ضرایب رو تشکیل میده
+#که یک کلاس از کتابخانه نامپای است   استفاده میکنیم  np.poly1d برای نوشتن به فرم چند جمله ای از 
+# در اخر حاصل را چاپ می کنیم
+import numpy as np
+subtraction_Coef1 = np.array(coefficients)
+subtraction_Coef2 = np.array(coefficients2)
+subtraction_MatrixCoefResult = subtraction_Coef1 - subtraction_Coef2
+subtraction_matrix_result=np.poly1d(subtraction_MatrixCoefResult)
+print("subtraction of the resulting polynomial with numpy")
+print(subtraction_matrix_result)
+
+#numpy ضرب با  
+# برعکس  میکنیم.inverse ابتدا داخل دو لیست را به کمک  
+#حاصل ضرب دو لیست را حساب میکنیم و در لیست حاضل ضرب ضرایب میریزیم polymul به کمک تابع 
+#که یک کلاس از کتابخانه نامپای است   استفاده میکنیم  np.poly1d برای نوشتن به فرم چند جمله ای از 
+# در اخر حاصل را چاپ می کنیم
+import numpy as np
 Multiplication_coefficients = np.polymul(coefficients, coefficients2)
 Multiplication_string = np.poly1d(Multiplication_coefficients)
 print("Multiplication of the resulting polynomial with numpy")
 print(Multiplication_string)
 #numpy تقسیم با 
+#ابتدا به کمک  کتابخانه نامپای دو لیست را به آرایه تبدیل میکنیم 
+#میریزیم quotient, remainder حاصل تقسیم دو چند جمله ای را حساب میکنیم و در  polydiv با کمک تابع 
+# که یک کلاس از کتابخانه نامپای است دو آرایه را فرم چندجمله ای  در میاوریمnp.poly1d به کمک
+#را چاپ میکنیم  quotient, remainder در اخر 
+import numpy as np
+dividend = np.array(coefficients)  
+divisor = np.array(coefficients2)  
+quotient, remainder = np.polydiv(dividend, divisor)
+quotient  = np.poly1d(quotient)
+remainder = np.poly1d(remainder)
+print("Quotient:" , quotient)
+print("Remainder:", remainder)
 
 # numpyمشتق با  
-
+# تازمانی که متغیر کمکی از تعداد دفعات مشتق گرفتن کوجکتر استwhile با استفاده از حلقه 
+# بار حساب میشه n مشتق لیست ضرایب  polyder ابتدا با استفاده از تابع 
+## که یک کلاس از کتابخانه نامپای است دو آرایه را فرم چندجمله ای  در میاوریمnp.poly1d به کمک
+#و در انتها مقدار مشتق رو جاپ میکنیم 
 import numpy as np
-derivative_coefficients = coefficients
+derivativee_coefficients = coefficients
 i = 0
 while i < number_of_derivative :
-    derivative_coefficients = np.polyder(derivative_coefficients)
+    derivativee_coefficients = np.polyder(derivativee_coefficients)
     i += 1
-derivative_string = np.poly1d(derivative_coefficients)
+derivative_string = np.poly1d(derivativee_coefficients)
 print("Derivative of the resulting polynomial with numpy:")
 print(derivative_string)
 
-#numpy انتگرال با 
+#numpy انتگرال با
+
+
+
 import numpy as np
-integral_coefficients = coefficients
+number_of_integral = int(input("Enter the number of integrals: "))
+coefficients_array = np.array(coefficients)
+integrals = [coefficients_array]  
 i = 0
 while i < number_of_integral:
-    integral_coefficients = np.polyint(integral_coefficients)
+    integrals.append(np.polyint(integrals[-1]))
     i += 1
-integral_string = np.poly1d(integral_coefficients)
-
-print(f"The {number_of_integral}-th integral of the polynomial:")
-print(integral_string)
+print("The integral results are:")
+i = 0
+while i < len(integrals):
+    print(np.poly1d(integrals[i]))
+    i += 1
 
 #numpy ریشه با 
-
-
-
-
-
-
+import numpy as np
+def find_roots(coefficients):
+    roots = np.roots(coefficients)    
+    return roots
+roots = find_roots(coefficients)
+print("Root(s) of the polynomial equation:", roots)
 
 #برازش منحنی 
 import numpy as np
@@ -372,7 +404,7 @@ y_data = model_function(x_data, *coefficients) + np.random.normal(0, 5, len(x_da
 popt, pcov = curve_fit(model_function, x_data, y_data, p0=coefficients)
 y_fit = model_function(x_data, *popt)
 plt.scatter(x_data, y_data, label='Data')
-plt.plot(x_data, y_fit, color='red', label='Fitted curve')
+plt.plot(x_data, y_fit, color='green', label='Fitted curve')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('Curve Fitting for the Polynomial')
